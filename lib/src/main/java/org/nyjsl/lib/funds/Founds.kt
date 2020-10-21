@@ -1,5 +1,7 @@
 package org.nyjsl.lib.funds
 
+import java.io.Console
+
 
 fun main() {
     println("Hello World!")
@@ -15,6 +17,56 @@ fun main() {
 
     var x:String
     x = "xx"
+
+    val map = mapOf("a" to 1,"b" to 2,"c" to 3)
+
+    print(map["a"])
+
+    val d = InitOrderDemo("abc")
+
+}
+
+class Person(){
+    //一个主构造函数,一个或多个次构造函数
+    var children:MutableList<Person> = mutableListOf()
+    //次构造函数
+    constructor(parent:Person) : this() {
+        parent.children.add(this)
+    }
+
+}
+
+class InitOrderDemo(par:String){
+    var property = "First Property: ${par}".also(::println)
+    init {
+        println("First initializer block that prints $par")
+
+    }
+    var property2 = "Second Property: ${par.length}".also(::println)
+    init {
+        println("Second initializer block that prints ${par.length}")
+
+    }
+}
+
+//默认情况下类都是final的 ,如果想让类可继承,必须使用open关键字标记
+
+open class Base(p:Int){
+    fun canNotOv(){
+        print("222")
+    }
+    //方法可重载也需要open关键字标记
+    open fun canOv(){
+        print(111)
+    }
+}
+
+class Derived(p:Int):Base(p){
+
+    override fun canOv() {
+        super.canOv()
+        print(222)
+    }
 
 }
 
